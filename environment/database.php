@@ -26,10 +26,24 @@ class Database{
 }
 $database = new Database();
 
+// ESSE RQ VEM DA REQUISIÇÃO DO JQUERY E É PASSADO UM DADO COMO RQ:'GET'
+//AÍ ELE FAZ O CASE PRA VER QUAL FOI REQUISITADO E INSTANCIA A FUNÇÃO A PARTIR DAQUILO
+
+
 if (isset($_POST['rq'])){
    switch($_POST['rq']){
     case 'get':
-    echo json_encode($database->getAll());
+        echo json_encode($database->getAll());
     break;
+    case 'isrt':
+        // Insere um novo item na base de dados
+        $itemName = isset($_POST['itemName']) ? $_POST['itemName'] : '';
+        if ($itemName) {
+            $newItemId = $database->insertItem($itemName);
+            echo $newItemId;
+        } else {
+            echo 'Erro: Nome do item não fornecido.';
+        }
+        break;
    } 
 };

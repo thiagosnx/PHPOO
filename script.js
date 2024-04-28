@@ -7,6 +7,19 @@ function loadItems(){
         })
     })
 }
+function insertItem(){
+    var itemName = $('#itemName').val();
+    $.post('environment/database.php', {rq:'isrt', 'name':itemName}, function(response){
+        if(response != 'Erro'){
+            loadItems();
+        }else{
+            console.log(response);
+        }
+    }
+)
+
+}
+
 
 $(document).ready(function(){
     loadItems();
